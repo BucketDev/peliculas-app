@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { CarouselComponent } from './carousel/carousel.component';
-import { SigninButtonComponent } from './navbar/signin-button.component';
 
 @NgModule({
   imports: [
@@ -13,8 +12,7 @@ import { SigninButtonComponent } from './navbar/signin-button.component';
   ],
   declarations: [
     NavbarComponent,
-    CarouselComponent,
-    SigninButtonComponent
+    CarouselComponent
   ],
   exports: [
     NavbarComponent,
