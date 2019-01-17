@@ -1,4 +1,9 @@
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+<div id="peliculasCarousel" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li *ngFor="let image of images; let idx = index"
+        data-target="#peliculasCarousel"
+        [attr.data-slide-to]="idx" [ngClass]="{'active': idx === 0}"></li>
+  </ol>
   <div class="carousel-inner">
     <div *ngFor="let image of images; let idx = index" class="carousel-item" [ngClass]="{'active': idx === 0}">
         <img src="{{image.url}}" class="d-block w-100" alt="...">
