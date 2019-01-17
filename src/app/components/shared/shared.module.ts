@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { NavbarComponent } from './navbar/navbar.component';
+import { CarouselComponent } from './carousel/carousel.component';
 
 @NgModule({
   imports: [
@@ -10,10 +11,12 @@ import { NavbarComponent } from './navbar/navbar.component';
     RouterModule
   ],
   declarations: [
-    NavbarComponent
+    NavbarComponent,
+    CarouselComponent
   ],
   exports: [
-    NavbarComponent
+    NavbarComponent,
+    CarouselComponent
   ]
 })
 export class SharedModule { }
