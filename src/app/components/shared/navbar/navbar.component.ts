@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-declare var $ :any;
+import { AuthService } from 'src/app/providers/auth.service';
+import { PeliUser } from 'src/app/interfaces/peli-user.interface';
+import { AngularFirestoreDocument } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-navbar',
@@ -8,12 +10,20 @@ declare var $ :any;
 })
 export class NavbarComponent implements OnInit {
 
-  ngOnInit(): void {}
+  peliUser: PeliUser;
 
-  constructor() {}
+  ngOnInit(): void {
+    
+  }
+
+  constructor(private auth: AuthService) {
+  }
 
   googleSignIn = () => {
     console.log("googleSignIn");
+  }
+
+  getPeliUser = () => {
   }
 
 }
