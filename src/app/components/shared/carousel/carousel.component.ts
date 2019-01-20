@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CarouselService } from 'src/app/providers/shared/carousel.service';
 import { CarouselImage } from '../../../interfaces/carousel-image.interface';
+import { AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-carousel',
@@ -9,13 +11,14 @@ import { CarouselImage } from '../../../interfaces/carousel-image.interface';
 })
 export class CarouselComponent implements OnInit {
 
-  images: CarouselImage[];
+  imagesCollection: AngularFirestoreCollection<CarouselImage[]>;
+  images: Observable<CarouselImage[]>;
 
   constructor(private carouselService: CarouselService) {
-    this.carouselService.getImages().subscribe((images: CarouselImage[]) => this.images = images);
   }
 
   ngOnInit() {
+    this.images = this.carouselService.getImages().valueChanges();
   }
 
 }
