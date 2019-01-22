@@ -6,6 +6,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { SharedModule } from './components/shared/shared.module'
+import { TopVotedModule } from './components/top-voted/top-voted-module';
 
 import { AppComponent } from './app.component';
 import { LandingComponent } from './components/landing/landing.component';
@@ -26,7 +27,8 @@ import { environment } from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFirestoreModule,
-    SharedModule
+    SharedModule,
+    TopVotedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
