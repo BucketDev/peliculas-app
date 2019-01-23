@@ -7,8 +7,8 @@
       <div class="card">
         <div class="card-header text-white text-center bg-dark">Category</div>
         <div class="card-body">
-          <div class="btn-group-toggle p-1" data-toggle="buttons" *ngFor="let tag of tags">
-            <label class="btn btn-block btn-outline-secondary">
+          <div class="btn-group-toggle p-1" data-toggle="buttons">
+            <label class="btn btn-block btn-outline-secondary" [attr.id]="tag.id" (click)="tagSelected($event)" *ngFor="let tag of tags">
               <input type="checkbox" autocomplete="off"> {{tag.name}}
             </label>
           </div>
@@ -18,7 +18,7 @@
     <div class="col-md-9">
       <div class="card-columns">
         <div *ngFor="let movie of movies">
-          <app-movie [movie]=movie></app-movie>
+          <app-movie [movie]="movie"></app-movie>
         </div>
       </div>
     </div>
