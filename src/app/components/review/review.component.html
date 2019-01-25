@@ -1,0 +1,9 @@
+<ul class="list-unstyled border-top py-2">
+  <li class="media" *ngFor="let review of reviews">
+    <img src="{{review.peliUser?.photo}}" class="mr-3 img-peli-thumbnail" alt="user photo">
+    <div class="media-body">
+      <h5 class="mt-0 mb-1">{{review.peliUser?.displayName}}</h5>
+      {{review.review}}
+    </div>
+  </li>
+</ul>

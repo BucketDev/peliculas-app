@@ -1,7 +1,7 @@
 <div class="card">
   <img src="{{movie.photoUrl}}" alt="movie photo"
         class="card-img-top" style="cursor: pointer"
-        [routerLink]="['/movies', movie.id]">
+        [routerLink]="['/movie', movie.id]">
   <div class="card-body">
     <h5 class="card-title">{{movie.name}}</h5>
     <h6 class="card-suntitle text-muted">{{movie.premiere | movieDate}}</h6>
@@ -13,7 +13,7 @@
   </div>
   <div class="card-footer text-muted d-flex align-items-center justify-content-between">
     <div>
-      <span class="badge badge-primary m-1" *ngFor="let tag of movie.tags">{{(tag | movieTags | async)?.name}}</span>
+      <span class="badge badge-primary m-1" *ngFor="let tag of movie.peliTags">{{tag.name}}</span>
     </div>
     <small class="w-50 text-right">{{movie.likes}} likes</small>
   </div>

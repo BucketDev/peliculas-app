@@ -1,23 +1,27 @@
 <div class="container mt-3">
-  <div class="row">
-    <h2>Top voted <small class="text-muted">of the week</small></h2>
-  </div>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item" [routerLink]="['/']" aria-current="page">Home</li>
+      <li class="breadcrumb-item active" aria-current="page">Top Voted</li>
+    </ol>
+  </nav>
+  <h2>Top voted <small class="text-muted">of the week</small></h2>
   <div class="row">
     <div class="col-md-3">
-      <div class="card">
+      <app-loading *ngIf="!tags"></app-loading>
+      <div class="card border-0" *ngIf="tags">
         <div class="card-header text-white text-center bg-dark">Category</div>
-        <div class="card-body">
-          <div class="btn-group-toggle p-1" data-toggle="buttons">
-            <label class="btn btn-block btn-outline-secondary" [attr.id]="tag.id" (click)="tagSelected($event)" *ngFor="let tag of tags">
-              <input type="checkbox" autocomplete="off"> {{tag.name}}
-            </label>
-          </div>
+        <div class="card-body p-0">
+          <ul class="list-group">
+            <li *ngFor="let tag of tags" class="list-group-item" [attr.id]="tag.id" (click)="tagSelected($event)">{{tag.name}}</li>
+          </ul>
         </div>
       </div>
     </div>
     <div class="col-md-9">
-      <div class="card-columns">
-        <div *ngFor="let movie of movies">
+      <app-loading *ngIf="!movies"></app-loading>
+      <div class="card-columns" *ngIf="movies">
+        <div *ngFor="let movie of movies" class="animated fadeIn">
           <app-movie [movie]="movie"></app-movie>
         </div>
       </div>
