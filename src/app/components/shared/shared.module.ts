@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { CarouselComponent } from './carousel/carousel.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   imports: [
@@ -12,11 +13,13 @@ import { CarouselComponent } from './carousel/carousel.component';
   ],
   declarations: [
     NavbarComponent,
-    CarouselComponent
+    CarouselComponent,
+    LoadingComponent
   ],
   exports: [
     NavbarComponent,
-    CarouselComponent
+    CarouselComponent,
+    LoadingComponent
   ]
 })
 export class SharedModule { }

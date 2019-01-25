@@ -1,0 +1,33 @@
+<app-loading *ngIf="!movie"></app-loading>
+<div class="container mt-3" *ngIf="movie">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" [routerLink]="['/']" aria-current="page">Home</li>
+    <li class="breadcrumb-item" [routerLink]="['/topVoted']" aria-current="page">Top Voted</li>
+    <li class="breadcrumb-item active" aria-current="page">{{movie.name}}</li>
+  </ol>
+  <h2>{{movie.name}} <small class="text-muted">{{movie.premiere | movieDate}}</small></h2>
+  <div class="row animated fadeIn">
+    <div class="col-md-6">
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe id="ytplayer" type="text/html"
+                [src]="movie.youtubeCode | youtubeUri"
+                frameborder="0" allowfullscreen>
+        </iframe>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <p class="card-text">{{movie.summary}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-12">
+        <div class="d-flex justify-content-end my-1">
+          <button type="button" class="btn btn-outline-success">
+            <fa-icon [icon]="faPlus"></fa-icon></button>
+        </div>
+        <app-review [reviews]="reviews"></app-review>
+      </div>
+    </div>
+  </div>
+</div>

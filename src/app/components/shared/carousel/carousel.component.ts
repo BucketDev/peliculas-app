@@ -12,13 +12,13 @@ import { Observable } from 'rxjs/internal/Observable';
 export class CarouselComponent implements OnInit {
 
   imagesCollection: AngularFirestoreCollection<CarouselImage[]>;
-  images: Observable<CarouselImage[]>;
+  images: CarouselImage[];
 
   constructor(private carouselService: CarouselService) {
   }
 
   ngOnInit() {
-    this.images = this.carouselService.getImages().valueChanges();
+    this.carouselService.getImages().subscribe((images: CarouselImage[]) => this.images = images);
   }
 
 }

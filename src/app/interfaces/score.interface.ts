@@ -1,4 +1,4 @@
-export interface Revision {
+export interface Score {
   user: string,
   value: number
 }

@@ -2,9 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
 import { SharedModule } from './components/shared/shared.module'
 import { TopVotedModule } from './components/top-voted/top-voted-module';
 
@@ -25,8 +29,10 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFirestoreModule,
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+    AngularFireStorageModule,
+    FontAwesomeModule,
     SharedModule,
     TopVotedModule
   ],

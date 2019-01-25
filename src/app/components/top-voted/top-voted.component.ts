@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { QuerySnapshot, QueryDocumentSnapshot } from '@angular/fire/firestore';
 import { TagService } from '../../providers/tag.service';
 import { MovieService } from '../../providers/movie.service';
 import { Tag } from 'src/app/interfaces/tag.interface';
@@ -18,25 +17,16 @@ export class TopVotedComponent implements OnInit {
 
   constructor(private tagService: TagService,
               private movieService: MovieService) {
-    this.tagService.getTags().subscribe((data: QuerySnapshot<Tag>) => {
-      this.tags = [];
-      data.forEach((tagDocument: QueryDocumentSnapshot<Tag>) => {
-        let tag: Tag = tagDocument.data();
-        tag.id = tagDocument.id;
-        this.tags.push(tag);
-      });
+    this.tagService.getTags().subscribe((data: Tag[]) => {
+      this.tags = data;
     });
-    this.movieService.getTopVoted().subscribe((data: QuerySnapshot<Movie>) => {
-      this.movies = [];
-      data.forEach((movieDocument: QueryDocumentSnapshot<Movie>) => {
-        let movie: Movie = movieDocument.data();
-        movie.id = movieDocument.id;
-        this.movies.push(movie);
-      })
+    this.movieService.getTopVoted().subscribe((data: Movie[]) => {
+      this.movies = data;
     });
   }
 
   tagSelected = (event: MouseEvent) => {
+    $(event.target).toggleClass('active');
     console.log($(event.target).hasClass('active'), $(event.target).attr('id'));
   }
 

@@ -1,13 +1,18 @@
-import { Revision } from './revision.interface';
+import { Score } from './score.interface';
+import { Review } from './review.interface';
 import { DocumentReference } from '@angular/fire/firestore';
+import { Tag } from './tag.interface';
 export interface Movie {
   id: string,
   average: number,
   likes: number,
   name: string,
   premiere: any,
-  revisions: Revision[],
+  score: Score[],
+  reviews: Review[],
   sumary: string,
   tags: DocumentReference[],
-  photoUrl: string
+  peliTags: Tag[],
+  photoUrl: string,
+  youtubeCode: string
 }
