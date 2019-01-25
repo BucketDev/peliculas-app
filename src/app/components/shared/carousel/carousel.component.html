@@ -1,12 +1,12 @@
 <app-loading *ngIf="!images"></app-loading>
-<div *ngIf="images" id="peliculasCarousel" class="carousel slide" data-ride="carousel">
+<div *ngIf="images" id="peliculasCarousel" class="carousel slide animated fadeIn" data-ride="carousel">
   <ol class="carousel-indicators">
     <li *ngFor="let image of images; let idx = index"
         data-target="#peliculasCarousel"
         [attr.data-slide-to]="idx" [ngClass]="{'active': idx === 0}"></li>
   </ol>
   <div class="carousel-inner">
-    <div *ngFor="let image of images; let idx = index" class="carousel-item animated fadeIn" [ngClass]="{'active': idx === 0}">
+    <div *ngFor="let image of images; let idx = index" class="carousel-item" [ngClass]="{'active': idx === 0}">
         <img src="{{image.url}}" class="d-block w-100" alt="">
         <div class="carousel-caption d-none d-md-block">
           <h3>{{image.name}}</h3>

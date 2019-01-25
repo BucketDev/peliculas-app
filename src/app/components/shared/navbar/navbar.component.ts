@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/providers/auth.service';
-import { PeliUser } from 'src/app/interfaces/peli-user.interface';
-import { AngularFirestoreDocument } from '@angular/fire/firestore';
+import { faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-navbar',
@@ -10,20 +9,18 @@ import { AngularFirestoreDocument } from '@angular/fire/firestore';
 })
 export class NavbarComponent implements OnInit {
 
-  peliUser: PeliUser;
+  faSignInAlt = faSignInAlt;
+  faSignOutAlt = faSignOutAlt;
 
   ngOnInit(): void {
-    
+
   }
 
   constructor(private auth: AuthService) {
   }
 
-  googleSignIn = () => {
-    console.log("googleSignIn");
-  }
-
-  getPeliUser = () => {
+  logOut = () => {
+    this.auth.logout();
   }
 
 }

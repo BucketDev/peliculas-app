@@ -10,6 +10,7 @@ import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection,
 })
 export class AuthService {
 
+
   peliUserDocument: AngularFirestoreDocument<PeliUser>;
   peliUser: PeliUser;
   peliUsersCollection: AngularFirestoreCollection<PeliUser>;
@@ -46,6 +47,11 @@ export class AuthService {
 
   googleLogin = (): void => {
     this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+  }
+  
+  logout = (): void => {
+    this.afAuth.auth.signOut();
+    this.peliUser = null;
   }
 
 }
