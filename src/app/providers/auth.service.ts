@@ -48,10 +48,11 @@ export class AuthService {
   googleLogin = (): void => {
     this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
   }
-  
+
   logout = (): void => {
     this.afAuth.auth.signOut();
     this.peliUser = null;
+    this.router.navigate(['/']);
   }
 
 }
