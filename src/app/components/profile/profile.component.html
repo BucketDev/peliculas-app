@@ -1,0 +1,26 @@
+<app-loading *ngIf="!user"></app-loading>
+<div class="container my-2" *ngIf="user">
+  <div class="row">
+    <div class="col-md-4 my-2">
+      <h4 class="text-monospace">{{user.displayName}}</h4>
+      <div class="card border-0 shadow">
+        <img src="{{user.photo}}" class="card-img-top" alt="user photo">
+        <div class="card-body">
+          <h5 class="card-title">About yourself</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="btn-group py-2" role="group">
+        <button type="button" class="btn btn-primary"
+                [routerLink]="['reviews']"
+                routerLinkActive='active'><fa-icon [icon]="faPenFancy"></fa-icon> Reviews</button>
+        <button type="button" class="btn btn-primary"
+                [routerLink]="['favourites']"
+                routerLinkActive='active'><fa-icon [icon]="faHeart"></fa-icon> Favourites</button>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

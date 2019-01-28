@@ -11,6 +11,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { SharedModule } from './components/shared/shared.module'
 import { TopVotedModule } from './components/top-voted/top-voted-module';
+import { ProfileModule } from './components/profile/profile.module';
 
 import { AppComponent } from './app.component';
 import { LandingComponent } from './components/landing/landing.component';
@@ -34,7 +35,8 @@ import { environment } from '../environments/environment';
     AngularFireStorageModule,
     FontAwesomeModule,
     SharedModule,
-    TopVotedModule
+    TopVotedModule,
+    ProfileModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background-color: #ecf0f1 !important;
+}
+
 .img-peli-thumbnail {
   height: 35px;
 }

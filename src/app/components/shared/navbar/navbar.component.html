@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+<nav class="navbar navbar-expand-lg sticky-top bg-dark navbar-dark">
   <a class="navbar-brand" [routerLink]="['/']">Perliculas App</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -13,7 +13,8 @@
       </li>
     </ul>
     <ul class="navbar-nav d-flex align-items-center" *ngIf="auth.peliUser">
-      <li class="btn btn-sm btn-outline-light nav-item p-0 mx-2 d-flex align-items-center">
+      <li class="btn btn-sm btn-outline-light nav-item p-0 mx-2 d-flex align-items-center"
+            [routerLink]="['/profile', auth.peliUser.uid]">
         <img src="{{auth.peliUser.photo}}" alt="photo" class="img-peli-thumbnail">
         <small class="text-monospace mx-2">{{auth.peliUser.displayName}}</small>
       </li>
