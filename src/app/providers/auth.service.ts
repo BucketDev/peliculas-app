@@ -18,6 +18,7 @@ export class AuthService {
   constructor(public router: Router,
               private afs: AngularFirestore,
               public afAuth: AngularFireAuth) {
+    this.peliUser = null;
     this.peliUsersCollection = this.afs.collection('users');
     this.afAuth.authState.subscribe((user: FireBaseUser) => {
       if(user) {
@@ -35,7 +36,8 @@ export class AuthService {
         this.peliUser = {
           displayName: user.displayName,
           email: user.email,
-          photo: user.photoURL
+          photo: user.photoURL,
+          uid: user.uid
         }
         this.peliUsersCollection.doc(user.uid).set(this.peliUser);
       } else {

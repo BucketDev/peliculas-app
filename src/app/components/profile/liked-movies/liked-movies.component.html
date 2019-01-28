@@ -1,0 +1,9 @@
+<div class="card" *ngFor="let likedMovie of likedMovies">
+  <img src="{{likedMovie.photoUrl}}" alt="movie photo"
+        class="card-img-top" style="cursor: pointer"
+        [routerLink]="['/movie', likedMovie.movieId]">
+  <div class="card-body">
+    <h5 class="card-title">{{likedMovie.name}}</h5>
+    <p class="card-text">{{likedMovie.summary}}</p>
+  </div>
+</div>
