@@ -1,6 +1,6 @@
 <app-loading *ngIf="!movie"></app-loading>
 <div class="container mt-3" *ngIf="movie">
-  <ol class="breadcrumb">
+  <ol class="breadcrumb bg-dark text-light">
     <li class="breadcrumb-item" [routerLink]="['/']" aria-current="page">Home</li>
     <li class="breadcrumb-item" [routerLink]="['/topVoted']" aria-current="page">Top Voted</li>
     <li class="breadcrumb-item active" aria-current="page">{{movie.name}}</li>
@@ -21,12 +21,14 @@
       </div>
     </div>
     <div class="col-md-6">
-      <div class="col-md-12">
-        <div class="d-flex justify-content-end my-1">
-          <button type="button" class="btn btn-outline-success">
-            <fa-icon [icon]="faPlus"></fa-icon></button>
-        </div>
+      <div class="col-md-12 bg-light border rounded py-3">
+        <button type="button" class="btn btn-outline-success" *ngIf="auth.peliUser"
+                (click)="showReview()">
+          <fa-icon [icon]="faPlus"></fa-icon> Add review
+        </button>
         <app-review [reviews]="reviews"></app-review>
+        <app-new-review (save)="saveReview($event)" (cancel)="cancelReview($event)"
+                        *ngIf="addingReview"></app-new-review>
       </div>
     </div>
   </div>

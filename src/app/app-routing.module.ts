@@ -6,17 +6,17 @@ import { SigninComponent } from './components/signin/signin.component';
 import { TopVotedComponent } from './components/top-voted/top-voted.component';
 import { MovieDetailComponent } from './components/movie/movie-detail.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { PROFILE_ROUTES } from './components/profile/profile-routing.routes';
+import { PROFILE_ROUTES } from './components/profile/profile.routes';
+import { ADMIN_ROUTES } from './components/admin/admin.routes';
 
 const routes: Routes = [
   { path: 'signin', component: SigninComponent },
-  { path: '', canActivate: [AuthGuardService], children: [
-    { path: 'home', component: LandingComponent },
-    { path: 'topVoted', component: TopVotedComponent },
-    { path: 'movie/:id', component: MovieDetailComponent },
-    { path: 'profile/:uid', component: ProfileComponent, children: PROFILE_ROUTES },
-    { path: '**', pathMatch: 'full', redirectTo: 'home' }
-  ]},
+  { path: 'home', component: LandingComponent },
+  { path: 'topVoted', component: TopVotedComponent },
+  { path: 'movie/:id', component: MovieDetailComponent },
+  { path: 'profile/:uid', component: ProfileComponent, children: PROFILE_ROUTES },
+  { path: 'admin', canActivate: [AuthGuardService], children: ADMIN_ROUTES},
+  { path: '**', pathMatch: 'full', redirectTo: 'home' },
 
 ];
 

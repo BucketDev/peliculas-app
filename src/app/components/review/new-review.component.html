@@ -1,0 +1,13 @@
+<form (ngSubmit)="saveReview(form)" #form="ngForm">
+  <div class="form-group">
+    <label for="review">Write your review:</label>
+    <textarea class="form-control" required
+              [(ngModel)]="review" name="reviewText" #reviewText="ngModel">
+    </textarea>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+    <fa-icon [icon]="faSave"></fa-icon> Create</button>
+  <button type="button" class="ml-2 btn btn-danger" (click)="cancelReview()">
+    <fa-icon [icon]="faBan"></fa-icon> Cancel
+  </button>
+</form>

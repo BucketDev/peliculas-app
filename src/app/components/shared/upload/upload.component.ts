@@ -1,0 +1,64 @@
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Upload } from '../../../interfaces/upload.interface';
+import { faSearch, faTrash, faUpload, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { UploadService } from '../../../providers/shared/upload.service';
+
+@Component({
+  selector: 'app-upload',
+  templateUrl: './upload.component.html',
+  styleUrls: ['./upload.component.css']
+})
+export class UploadComponent implements OnInit {
+
+  faSearch = faSearch;
+  faTrash = faTrash;
+  faUpload = faUpload;
+  faCheck = faCheck;
+
+  upload: Upload;
+  uploading: boolean = false;
+  uploaded: boolean = false;
+
+  @Output() photoUrl = new EventEmitter<string>()
+  @Input() label: string;
+
+  constructor(private uploadService: UploadService) {
+    this.upload = {
+      name: '',
+      file: null,
+      createdAt: new Date()
+    }
+  }
+
+  ngOnInit() {
+  }
+
+  fileSelected = (inputFile: HTMLInputElement) => {
+    let file = inputFile.files.item(0);
+    this.upload.name = file.name;
+    this.upload.file = file;
+  }
+
+  uploadFile = () => {
+    let uploadTask = this.uploadService.upload(this.upload);
+    this.uploading = true;
+    uploadTask.then((snapshot) => {
+      snapshot.ref.getDownloadURL().then((downloadURL: string) => {
+        this.uploading = false;
+        this.uploaded = true;
+        this.photoUrl.emit(downloadURL)
+      });
+    });
+  }
+
+  deleteFile = () => {
+    this.upload = {
+      name: '',
+      file: null,
+      createdAt: new Date()
+    }
+    let fileInput: HTMLInputElement = document.querySelector('input[type=file]');
+    fileInput.value = '';
+  }
+
+}

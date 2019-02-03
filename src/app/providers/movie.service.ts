@@ -9,7 +9,7 @@ import { Tag } from '../interfaces/tag.interface';
 })
 export class MovieService {
 
-  moviesCollection: AngularFirestoreCollection<Movie>;
+  private moviesCollection: AngularFirestoreCollection<Movie>;
 
   constructor(private afs: AngularFirestore) {
     this.moviesCollection = this.afs.collection('movies');
@@ -22,11 +22,13 @@ export class MovieService {
         let movie: Movie = action.payload.doc.data();
         movie.id = action.payload.doc.id;
         movie.peliTags = [];
-        movie.tags.forEach((tagDocument: DocumentReference) => {
-          tagDocument.get().then((tag: DocumentSnapshot<Tag>) => {
-            movie.peliTags.push(tag.data());
+        if(movie.tags) {
+          movie.tags.forEach((tagDocument: DocumentReference) => {
+            tagDocument.get().then((tag: DocumentSnapshot<Tag>) => {
+              movie.peliTags.push(tag.data());
+            })
           })
-        })
+        }
         return movie;
       })
     }));
@@ -34,6 +36,14 @@ export class MovieService {
 
   getMovie = (id: string) => {
     return this.moviesCollection.doc(id).get();
+  }
+
+  getMovies = () => {
+    return this.moviesCollection.valueChanges();
+  }
+
+  createMovie = (movie: Movie): Promise<DocumentReference> => {
+    return this.moviesCollection.add(movie);
   }
 
 }

@@ -2,7 +2,15 @@
 body {
   background-color: #ecf0f1 !important;
 }
-
+.table > tbody > tr > td {
+     vertical-align: middle;
+}
+.breadcrumb > li:not(.active) {
+  cursor: pointer;
+}
+.breadcrumb > li:not(.active):hover {
+  color: #20c997;
+}
 .img-peli-thumbnail {
   height: 35px;
 }

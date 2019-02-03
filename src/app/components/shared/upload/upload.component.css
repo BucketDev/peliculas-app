@@ -1,0 +1,20 @@
+.btn-browse {
+  border-top-left-radius: 0!important;
+  border-bottom-left-radius: 0!important;
+  border-top-right-radius: .25rem!important;
+  border-bottom-right-radius: .25rem!important;
+}
+
+.btn-upload {
+  border-top-left-radius: 0!important;
+  border-bottom-left-radius: 0!important;
+  border-top-right-radius: .25rem!important;
+  border-bottom-right-radius: .25rem!important;
+}
+
+.input-browse {
+  border-top-left-radius: .25rem!important;
+  border-bottom-left-radius: .25rem!important;
+  border-top-right-radius: 0!important;
+  border-bottom-right-radius: 0!important;
+}

@@ -1,0 +1,30 @@
+<div class="container my-3">
+  <form class="bg-light p-3 rounded" (ngSubmit)="createMovie(form)" #form="ngForm">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" required
+            [(ngModel)]="movie.name" name="name" #name="ngModel">
+    </div>
+    <div class="form-group">
+      <label for="summary">Summary</label>
+      <textarea type="text" class="form-control" id="summary" required
+                [(ngModel)]="movie.summary" name="summary" #summary="ngModel">
+      </textarea>
+    </div>
+    <div class="form-group">
+      <label for="youtubeCode">Youtube video</label>
+      <input type="text" class="form-control" id="youtubeCode" required
+            [(ngModel)]="movie.youtubeCode" name="youtubeCode" #youtubeCode="ngModel">
+    </div>
+    <div class="form-group">
+      <label for="premiere">Youtube video</label>
+      <input type="date" class="form-control" id="premiere" required
+            [(ngModel)]="movie.premiere" name="premiere" #premiere="ngModel">
+    </div>
+    <app-upload [label]="'Photo'" (photoUrl)="setPhotoUrl($event)"></app-upload>
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+      <fa-icon [icon]="faSave"></fa-icon> Create</button>
+    <button type="button" class="btn btn-danger ml-2" [routerLink]="['/admin/movies']">
+      <fa-icon [icon]="faBan"></fa-icon> Cancel</button>
+  </form>
+</div>

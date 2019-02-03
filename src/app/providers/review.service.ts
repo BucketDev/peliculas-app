@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentSnapshot } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { Review } from '../interfaces/review.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,9 @@ export class ReviewService {
     return this.afs.collection('reviews', ref =>
       ref.where('uid', '==', uid)
     ).valueChanges();
+  }
+
+  createReview = (review: Review): Promise<DocumentReference> => {
+    return this.afs.collection('reviews').add(review);
   }
 }

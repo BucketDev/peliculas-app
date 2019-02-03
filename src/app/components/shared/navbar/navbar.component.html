@@ -11,6 +11,16 @@
             routerLinkActive='active'
             [routerLink]="['/topVoted']">Top Voted</a>
       </li>
+      <li class="nav-item dropdown" *ngIf="auth.peliUser?.admin">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Admin
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item"
+              routerLinkActive='active'
+              [routerLink]="['admin/movies']">Movies</a>
+        </div>
+      </li>
     </ul>
     <ul class="navbar-nav d-flex align-items-center" *ngIf="auth.peliUser">
       <li class="btn btn-sm btn-outline-light nav-item p-0 mx-2 d-flex align-items-center"

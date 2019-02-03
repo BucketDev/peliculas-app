@@ -18,6 +18,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { SigninComponent } from './components/signin/signin.component';
 
 import { environment } from '../environments/environment';
+import { AdminModule } from './components/admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { environment } from '../environments/environment';
     FontAwesomeModule,
     SharedModule,
     TopVotedModule,
-    ProfileModule
+    ProfileModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]

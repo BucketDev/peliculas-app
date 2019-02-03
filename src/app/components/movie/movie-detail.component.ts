@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MovieService } from 'src/app/providers/movie.service';
-import { Movie } from 'src/app/interfaces/movie.interface';
 import { DocumentSnapshot } from '@angular/fire/firestore';
-import { ReviewService } from 'src/app/providers/review.service';
-import { Review } from 'src/app/interfaces/review.interface';
+import { ReviewService } from '../../providers/review.service';
+import { MovieService } from '../../providers/movie.service';
+import { AuthService } from '../../providers/auth.service';
+import { Movie } from '../../interfaces/movie.interface';
+import { Review } from '../../interfaces/review.interface';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -18,19 +19,26 @@ export class MovieDetailComponent implements OnInit {
 
   movie: Movie;
   reviews: Review[];
+  addingReview: boolean = false;
+  review: Review;
 
   constructor(private activatedRoute:ActivatedRoute,
               private movieService: MovieService,
-              private reviewService: ReviewService) {
+              private reviewService: ReviewService,
+              private auth: AuthService) {
     this.activatedRoute.params.subscribe(params => {
       this.getMovie(params['id']);
       this.getReviews(params['id'])
     });
   }
 
+  ngOnInit() {
+  }
+
   getMovie = (id: string) => {
     this.movieService.getMovie(id).subscribe((movieDocument: DocumentSnapshot<Movie>) => {
       this.movie = movieDocument.data();
+      this.movie.id = id;
     });
   }
 
@@ -40,7 +48,26 @@ export class MovieDetailComponent implements OnInit {
     })
   }
 
-  ngOnInit() {
+  showReview = () => {
+    this.addingReview = true;
+
+    this.review = {
+      movieId: this.movie.id,
+      movieName: this.movie.name,
+      moviePhoto: this.movie.photoUrl,
+      uid: this.auth.peliUser.uid,
+      photo: this.auth.peliUser.photo,
+      displayName: this.auth.peliUser.displayName,
+      review: ''
+    };
+  };
+
+  cancelReview = () => this.addingReview = false;
+
+  saveReview = (review: string) => {
+    this.review.review = review;
+    this.addingReview = false;
+    this.reviewService.createReview(this.review).then();
   }
 
 }

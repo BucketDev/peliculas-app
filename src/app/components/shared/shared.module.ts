@@ -6,22 +6,27 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { LoadingComponent } from './loading/loading.component';
+import { UploadComponent } from './upload/upload.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule
   ],
   declarations: [
     NavbarComponent,
     CarouselComponent,
-    LoadingComponent
+    LoadingComponent,
+    UploadComponent
   ],
   exports: [
     NavbarComponent,
     CarouselComponent,
-    LoadingComponent
+    LoadingComponent,
+    UploadComponent
   ]
 })
 export class SharedModule { }

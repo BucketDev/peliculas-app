@@ -1,6 +1,6 @@
-<ul class="list-unstyled py-2">
-  <li class="media mb-2 border bg-light align-items-center shadow-sm" *ngFor="let review of reviews">
-    <img src="{{review.moviePhoto}}" class="mr-3 w-50" alt="user photo"
+<ul class="list-unstyled">
+  <li class="media mb-2 border bg-light align-items-center shadow-sm rounded" *ngFor="let review of reviews">
+    <img src="{{review.moviePhoto}}" class="mr-3 w-50 rounded-left" alt="user photo"
         style="cursor: pointer" [routerLink]="['/movie', review.movieId]">
     <div class="media-body">
       <blockquote class="blockquote">

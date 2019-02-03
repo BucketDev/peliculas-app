@@ -7,7 +7,7 @@
   </ol>
   <div class="carousel-inner">
     <div *ngFor="let image of images; let idx = index" class="carousel-item" [ngClass]="{'active': idx === 0}">
-        <img src="{{image.url}}" class="d-block w-100" alt="">
+        <img src="{{image.url}}" class="d-block w-100 rounded" alt="">
         <div class="carousel-caption d-none d-md-block">
           <h3>{{image.name}}</h3>
         </div>

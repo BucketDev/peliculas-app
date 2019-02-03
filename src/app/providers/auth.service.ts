@@ -4,6 +4,8 @@ import { auth, User as FireBaseUser } from 'firebase/app';
 import { Router } from '@angular/router';
 import { PeliUser } from '../interfaces/peli-user.interface';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection, DocumentSnapshot } from '@angular/fire/firestore';
+import { switchMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +14,21 @@ export class AuthService {
 
 
   peliUserDocument: AngularFirestoreDocument<PeliUser>;
-  peliUser: PeliUser;
-  peliUsersCollection: AngularFirestoreCollection<PeliUser>;
+  peliUser: PeliUser = null;
+  peliUser$: Observable<PeliUser>;
+  peliUsersCollection: AngularFirestoreCollection<PeliUser> = this.afs.collection('users');
 
   constructor(public router: Router,
               private afs: AngularFirestore,
               public afAuth: AngularFireAuth) {
-    this.peliUser = null;
-    this.peliUsersCollection = this.afs.collection('users');
+    this.peliUser$ = this.afAuth.authState.pipe(switchMap(user => {
+      if(user) {
+        return this.peliUsersCollection.doc(user.uid).valueChanges();
+      } else {
+        return of(null);
+      }
+    }));
+
     this.afAuth.authState.subscribe((user: FireBaseUser) => {
       if(user) {
         this.createUser(user);
@@ -37,8 +46,9 @@ export class AuthService {
           displayName: user.displayName,
           email: user.email,
           photo: user.photoURL,
-          uid: user.uid
-        }
+          uid: user.uid,
+          admin: false
+        };
         this.peliUsersCollection.doc(user.uid).set(this.peliUser);
       } else {
         //just adds a reference to the user

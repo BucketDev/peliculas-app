@@ -1,0 +1,24 @@
+<div class="form-group">
+  <label for="file">{{label}}</label>
+  <div class="d-flex">
+    <input type="file" style="display: none" #fileInput (change)="fileSelected(fileInput)">
+    <input type="text" [(ngModel)]="upload.name" class="form-control input-browse" id="file" required
+            name="name" #name="ngModel" readonly>
+    <button *ngIf="!upload?.file" type="button" class="btn btn-secondary btn-browse" (click)="fileInput.click()">
+      <fa-icon [icon]="faSearch"></fa-icon>
+    </button>
+    <div class="d-flex" *ngIf="upload?.file && !uploaded">
+      <button type="button" class="btn btn-danger rounded-0" [disabled]="uploading" (click)="deleteFile()">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </button>
+      <button type="button" class="btn btn-primary btn-upload"
+              (click)="uploadFile()" [disabled]="uploading">
+        <fa-icon [icon]="faUpload" *ngIf="!uploading"></fa-icon>
+        <span class="spinner-border spinner-border-sm" *ngIf="uploading"></span>
+      </button>
+    </div>
+    <button type="button" class="btn btn-success btn-browse" *ngIf="uploaded">
+      <fa-icon [icon]="faCheck"></fa-icon>
+    </button>
+  </div>
+</div>

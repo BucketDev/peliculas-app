@@ -1,6 +1,7 @@
-<ul class="list-unstyled border-top py-2">
+<ul class="list-unstyled py-2">
   <li class="media" *ngFor="let review of reviews">
-    <img src="{{review.photo}}" class="mr-3 img-peli-thumbnail" alt="user photo">
+    <img src="{{review.photo}}" class="mr-3 img-peli-thumbnail" alt="user photo"
+          [routerLink]="['/profile', review.uid]" style="{cursor: pointer}">
     <div class="media-body">
       <h5 class="mt-0 mb-1">{{review.displayName}}</h5>
       {{review.review}}
