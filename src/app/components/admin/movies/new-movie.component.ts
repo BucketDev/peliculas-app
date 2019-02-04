@@ -24,7 +24,8 @@ export class NewMovieComponent implements OnInit {
       premiere: null,
       summary: '',
       photoUrl: '',
-      youtubeCode: ''
+      youtubeCode: '',
+      likes: 0
     };
   }
 

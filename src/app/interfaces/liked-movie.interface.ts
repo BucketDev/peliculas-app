@@ -1,5 +1,6 @@
 export interface LikedMovie {
-  moviId: string,
+  movieId: string,
   photoUrl: string,
-  summary: string
+  summary: string,
+  name: string,
 }

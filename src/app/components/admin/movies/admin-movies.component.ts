@@ -21,6 +21,10 @@ export class AdminMoviesComponent implements OnInit {
     });
   }
 
+  getProgressBg = (average: number) => {
+    return average >= 75 ? 'bg-success' : (average >= 50 ? 'bg-warning' : 'bg-danger');
+  }
+
   ngOnInit() {
   }
 

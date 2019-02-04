@@ -26,8 +26,7 @@ export class TopVotedComponent implements OnInit {
   }
 
   tagSelected = (event: MouseEvent) => {
-    $(event.target).toggleClass('active');
-    console.log($(event.target).hasClass('active'), $(event.target).attr('id'));
+    console.log((<HTMLInputElement>event.target).checked);
   }
 
   ngOnInit() {

@@ -39,11 +39,27 @@ export class MovieService {
   }
 
   getMovies = () => {
-    return this.moviesCollection.valueChanges();
+    return this.moviesCollection.snapshotChanges()
+    .pipe(map((actions: DocumentChangeAction<Movie>[]) => {
+      return actions.map((action: DocumentChangeAction<Movie>) => {
+        let movie: Movie = action.payload.doc.data();
+        movie.id = action.payload.doc.id;
+        return movie;
+      })
+    }));
   }
 
   createMovie = (movie: Movie): Promise<DocumentReference> => {
     return this.moviesCollection.add(movie);
+  }
+
+  updateLikes = (id: string, upvote: boolean) => {
+    this.getMovie(id).subscribe((movie: DocumentSnapshot<Movie>) => {
+      let likes = movie.data().likes;
+      this.moviesCollection.doc(id).update({
+        likes: upvote ? ++likes : --likes
+      });
+    });
   }
 
 }

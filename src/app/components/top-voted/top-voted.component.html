@@ -13,7 +13,12 @@
         <div class="card-header text-white text-center bg-dark">Category</div>
         <div class="card-body p-0">
           <ul class="list-group">
-            <li *ngFor="let tag of tags" class="list-group-item" [attr.id]="tag.id" (click)="tagSelected($event)">{{tag.name}}</li>
+            <li *ngFor="let tag of tags; let idx = index" class="list-group-item" [attr.id]="tag.id">
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input bg-success" [id]="'tag-' + idx" (change)="tagSelected($event)">
+                <label class="custom-control-label" [for]="'tag-' + idx">{{tag.name}}</label>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
