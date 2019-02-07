@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'home', component: LandingComponent },
   { path: 'topVoted', component: TopVotedComponent },
   { path: 'movie/:id', component: MovieDetailComponent },
-  { path: 'profile/:uid', component: ProfileComponent, children: PROFILE_ROUTES },
+  { path: 'profile/:uid', canActivate: [AuthGuardService], component: ProfileComponent, children: PROFILE_ROUTES },
   { path: 'admin', canActivate: [AuthGuardService], children: ADMIN_ROUTES},
   { path: '**', pathMatch: 'full', redirectTo: 'home' },
 

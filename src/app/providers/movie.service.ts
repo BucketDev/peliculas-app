@@ -49,6 +49,12 @@ export class MovieService {
     }));
   }
 
+  getComingMovies = () => {
+    return this.afs.collection('movies', ref =>
+      ref.where('premiere', '>', new Date())
+    ).valueChanges();
+  }
+
   createMovie = (movie: Movie): Promise<DocumentReference> => {
     return this.moviesCollection.add(movie);
   }

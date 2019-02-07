@@ -10,11 +10,11 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { SharedModule } from './components/shared/shared.module'
+import { LandingModule } from './components/landing/landing.module';
 import { TopVotedModule } from './components/top-voted/top-voted-module';
 import { ProfileModule } from './components/profile/profile.module';
 
 import { AppComponent } from './app.component';
-import { LandingComponent } from './components/landing/landing.component';
 import { SigninComponent } from './components/signin/signin.component';
 
 import { environment } from '../environments/environment';
@@ -23,7 +23,6 @@ import { AdminModule } from './components/admin/admin.module';
 @NgModule({
   declarations: [
     AppComponent,
-    LandingComponent,
     SigninComponent
   ],
   imports: [
@@ -36,6 +35,7 @@ import { AdminModule } from './components/admin/admin.module';
     AngularFireStorageModule,
     FontAwesomeModule,
     SharedModule,
+    LandingModule,
     TopVotedModule,
     ProfileModule,
     AdminModule
