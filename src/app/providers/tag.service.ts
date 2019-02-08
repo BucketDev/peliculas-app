@@ -16,7 +16,7 @@ export class TagService {
   }
 
   getTags = () => {
-    return this.tagCollection.snapshotChanges().pipe(map((actions: DocumentChangeAction<Tag>[]) => {
+    return this.afs.collection("tags").snapshotChanges().pipe(map((actions: DocumentChangeAction<Tag>[]) => {
       return actions.map((action: DocumentChangeAction<Tag>) => {
         let tag = action.payload.doc.data();
         tag.id = action.payload.doc.id;

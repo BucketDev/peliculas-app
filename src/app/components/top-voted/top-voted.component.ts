@@ -14,19 +14,25 @@ export class TopVotedComponent implements OnInit {
 
   tags: Tag[];
   movies: Movie[];
+  tagIds: number[] = [];
 
   constructor(private tagService: TagService,
               private movieService: MovieService) {
     this.tagService.getTags().subscribe((data: Tag[]) => {
-      this.tags = data;
+      this.tags = data.sort((a, b) => parseInt(a.id) - parseInt(b.id));
     });
-    this.movieService.getTopVoted().subscribe((data: Movie[]) => {
-      this.movies = data;
-    });
+    this.getTopVoted();
   }
 
-  tagSelected = (event: MouseEvent) => {
-    console.log((<HTMLInputElement>event.target).checked);
+  getTopVoted = (tagId?: number) => this.movieService.getTopVoted(tagId).subscribe((data: Movie[]) => {
+    this.movies = data;
+  });
+
+  tagSelected = (element: HTMLInputElement) => {
+    let value = parseInt(element.value);
+    Array.from(document.getElementsByClassName('custom-control-input'))
+      .forEach((input: HTMLInputElement) => element !== input && (input.checked = false));
+    element.checked ? this.getTopVoted(value) : this.getTopVoted();
   }
 
   ngOnInit() {

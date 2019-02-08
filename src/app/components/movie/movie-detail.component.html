@@ -7,7 +7,7 @@
   </ol>
   <h2>{{movie.name}} <small class="text-muted">{{movie.premiere | movieDate}}</small></h2>
   <div class="row animated fadeIn">
-    <div class="col-md-6">
+    <div class="col-md-6 my-2">
       <div class="embed-responsive embed-responsive-16by9">
         <iframe id="ytplayer" type="text/html"
                 [src]="movie.youtubeCode | youtubeUri"
@@ -28,11 +28,14 @@
       </div>
     </div>
     <div class="col-md-6">
-      <div class="col-md-12 bg-light border rounded py-3">
+      <div class="col-md-12 bg-dark rounded-top p-3">
         <button type="button" class="btn btn-outline-success" *ngIf="auth.peliUser"
                 (click)="showReview()">
           <fa-icon [icon]="faPlus"></fa-icon> Add review
         </button>
+      </div>
+      <div class="col-md-12 bg-light border rounded-bottom py-3">
+        <p *ngIf="!addingReview && !reviews?.length > 0" class="text-center text-muted h5">No reviews yet</p>
         <app-review [reviews]="reviews"></app-review>
         <app-new-review (save)="saveReview($event)" (cancel)="cancelReview($event)"
                         *ngIf="addingReview"></app-new-review>

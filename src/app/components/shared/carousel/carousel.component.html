@@ -1,16 +1,28 @@
-<app-loading *ngIf="!images"></app-loading>
-<div *ngIf="images" id="peliculasCarousel" class="carousel slide animated fadeIn" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li *ngFor="let image of images; let idx = index"
+<app-loading *ngIf="!movies"></app-loading>
+<div class="row justify-content-md-center">
+  <div class="col-md-6">
+    <div id="peliculasCarousel" class="carousel slide carousel-fade border border-warning rounded bg-secondary" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li *ngFor="let movie of movies; let idx = index"
         data-target="#peliculasCarousel"
         [attr.data-slide-to]="idx" [ngClass]="{'active': idx === 0}"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div *ngFor="let image of images; let idx = index" class="carousel-item" [ngClass]="{'active': idx === 0}">
-        <img src="{{image.url}}" class="d-block w-100 rounded" alt="">
-        <div class="carousel-caption d-none d-md-block">
-          <h3>{{image.name}}</h3>
+      </ol>
+      <div class="carousel-inner">
+        <div *ngFor="let movie of movies; let idx = index" class="carousel-item" [ngClass]="{'active': idx === 0}">
+          <div class="carousel-img d-flex justify-content-center">
+            <img src="{{movie.photoUrl}}" alt="movie photo"
+            style="cursor: pointer" [routerLink]="['/movie', movie.id]">
+          </div>
         </div>
-    </div>
+      </div>
+      <a class="carousel-control-prev" href="#peliculasCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#peliculasCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>  
   </div>
 </div>

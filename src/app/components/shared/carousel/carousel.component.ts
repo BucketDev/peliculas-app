@@ -1,24 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { CarouselService } from 'src/app/providers/shared/carousel.service';
-import { CarouselImage } from '../../../interfaces/carousel-image.interface';
-import { AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Observable } from 'rxjs/internal/Observable';
+import { MovieService } from '../../../providers/movie.service';
+import { Movie } from '../../../interfaces/movie.interface';
 
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
-  styles: []
+  styleUrls: ['./carousel.component.css']
 })
 export class CarouselComponent implements OnInit {
 
-  imagesCollection: AngularFirestoreCollection<CarouselImage[]>;
-  images: CarouselImage[];
+  movies: Movie[];
 
-  constructor(private carouselService: CarouselService) {
+  constructor(private movieService: MovieService) {
+    this.movieService.getCarouselMovies().subscribe((movies: Movie[]) => this.movies = movies);
   }
 
   ngOnInit() {
-    this.carouselService.getImages().subscribe((images: CarouselImage[]) => this.images = images);
+
   }
 
 }

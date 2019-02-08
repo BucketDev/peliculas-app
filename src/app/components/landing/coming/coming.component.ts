@@ -5,7 +5,7 @@ import { Movie } from '../../../interfaces/movie.interface';
 @Component({
   selector: 'app-coming',
   templateUrl: './coming.component.html',
-  styles: []
+  styleUrls: ['./coming.component.css']
 })
 export class ComingComponent implements OnInit {
 

@@ -15,24 +15,23 @@ export class MovieService {
     this.moviesCollection = this.afs.collection('movies');
   }
 
-  getTopVoted = () => {
-    return this.afs.collection<Movie>('movies').snapshotChanges()
+  getTopVoted = (tagId: number) => tagId ? this.afs.collection<Movie>('movies',ref =>
+      ref.where('tags','array-contains', tagId).orderBy('likes', 'desc')).snapshotChanges()
+      .pipe(map((actions: DocumentChangeAction<Movie>[]) => {
+        return actions.map((action: DocumentChangeAction<Movie>) => {
+          let movie: Movie = action.payload.doc.data();
+          movie.id = action.payload.doc.id;
+          return movie;
+        })
+      })) :
+    this.afs.collection<Movie>('movies',ref => ref.orderBy('likes', 'desc')).snapshotChanges()
     .pipe(map((actions: DocumentChangeAction<Movie>[]) => {
       return actions.map((action: DocumentChangeAction<Movie>) => {
         let movie: Movie = action.payload.doc.data();
         movie.id = action.payload.doc.id;
-        movie.peliTags = [];
-        if(movie.tags) {
-          movie.tags.forEach((tagDocument: DocumentReference) => {
-            tagDocument.get().then((tag: DocumentSnapshot<Tag>) => {
-              movie.peliTags.push(tag.data());
-            })
-          })
-        }
         return movie;
       })
     }));
-  }
 
   getMovie = (id: string) => {
     return this.moviesCollection.doc(id).get();
@@ -49,11 +48,15 @@ export class MovieService {
     }));
   }
 
-  getComingMovies = () => {
-    return this.afs.collection('movies', ref =>
+  getComingMovies = () => this.afs.collection('movies', ref =>
       ref.where('premiere', '>', new Date())
-    ).valueChanges();
-  }
+    ).snapshotChanges().pipe(map((actions: DocumentChangeAction<Movie>[]) => {
+      return actions.map((action: DocumentChangeAction<Movie>) => {
+        let movie: Movie = action.payload.doc.data();
+        movie.id = action.payload.doc.id;
+        return movie;
+      })
+    }));
 
   createMovie = (movie: Movie): Promise<DocumentReference> => {
     return this.moviesCollection.add(movie);
@@ -67,5 +70,15 @@ export class MovieService {
       });
     });
   }
+
+  getCarouselMovies = () => this.afs.collection('movies', ref => ref.orderBy('likes', 'desc').limit(4)).snapshotChanges()
+    .pipe(map((actions: DocumentChangeAction<Movie>[]) => {
+      return actions.map((action: DocumentChangeAction<Movie>) => {
+        let movie: Movie = action.payload.doc.data();
+        movie.id = action.payload.doc.id;
+        return movie;
+      })
+    })
+  );
 
 }

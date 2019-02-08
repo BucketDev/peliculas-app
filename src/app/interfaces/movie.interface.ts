@@ -1,7 +1,5 @@
 import { Score } from './score.interface';
 import { Review } from './review.interface';
-import { DocumentReference } from '@angular/fire/firestore';
-import { Tag } from './tag.interface';
 export interface Movie {
   id?: string,
   average?: number,
@@ -11,8 +9,7 @@ export interface Movie {
   score?: Score[],
   reviews?: Review[],
   summary: string,
-  tags?: DocumentReference[],
-  peliTags?: Tag[],
+  tags?: number[],
   photoUrl: string,
   youtubeCode: string
 }

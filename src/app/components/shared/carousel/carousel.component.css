@@ -1,0 +1,6 @@
+.carousel-caption {
+  background: rgba(0,0,0, 0.7); /* Black w/opacity/see-through */
+}
+.carousel-img img {
+  max-height: 500px;
+}

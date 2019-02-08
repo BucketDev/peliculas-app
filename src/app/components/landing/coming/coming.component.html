@@ -1,3 +1,19 @@
-<ul>
-  <li *ngFor="let movie of movies">{{movie.name}}</li>
-</ul>
+<app-loading *ngIf="!movies"></app-loading>
+<div class="animated fadeIn" *ngIf="movies">
+  <h1 class="mt-4">Coming soon</h1>
+  <hr>
+  <div class="row">
+    <div class="col-md-6" *ngFor="let movie of movies">
+      <div class="shadow p-0 bg-dark text-light rounded shadow my-2">
+        <div class="d-flex justify-content-start align-items-center">
+          <img src="{{movie.photoUrl}}" class="w-25 rounded-left" alt="movie photo"
+              style="cursor: pointer" [routerLink]="['/movie', movie.id]">
+          <div class="m-3">
+            <h4>{{movie.name}}<small class="text-muted"> {{movie.premiere | movieDate}}</small></h4>
+            <p class="h6 text-justify mt-2">{{movie.summary}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

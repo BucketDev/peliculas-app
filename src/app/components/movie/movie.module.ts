@@ -29,7 +29,8 @@ import { YoutubeUriPipe } from '../../pipes/youtube-uri.pipe';
     MovieDetailComponent
   ],
   exports: [
-    MovieComponent
+    MovieComponent,
+    MovieDatePipe
   ]
 })
 export class MovieModule { }

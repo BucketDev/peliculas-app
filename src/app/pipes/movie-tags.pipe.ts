@@ -1,16 +1,26 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DocumentReference, DocumentSnapshot } from '@angular/fire/firestore';
 import { Tag } from '../interfaces/tag.interface';
+import { TagService } from '../providers/tag.service';
 
 @Pipe({
   name: 'movieTags'
 })
 export class MovieTagsPipe implements PipeTransform {
 
-  transform(tagDocument: DocumentReference, args?: any): any {
-    return tagDocument.get().then((tagDocument: DocumentSnapshot<Tag>) => {
-      return tagDocument.data();
-    });
+  constructor(private tagService: TagService) { }
+
+  transform(tagIds: number[], args?: any): any {
+    let stringTags = [];
+    if(tagIds){
+      this.tagService.getTags().subscribe((tags: Tag[]) => {
+        tagIds.forEach(tagId =>{
+          let tag = tags.find(tag => tag.id === tagId.toString())
+          if (tag)
+            stringTags.push(tag.name);
+        })
+      });
+    }
+    return stringTags;
   }
 
 }

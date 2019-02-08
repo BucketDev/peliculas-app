@@ -13,7 +13,7 @@
   </div>
   <div class="card-footer text-muted d-flex align-items-center justify-content-between">
     <div>
-      <span class="badge badge-primary m-1" *ngFor="let tag of movie.peliTags">{{tag.name}}</span>
+      <span class="badge badge-primary m-1" *ngFor="let tag of movie.tags | movieTags">{{tag}}</span>
     </div>
     <small class="w-50 text-right">{{movie.likes}} likes</small>
   </div>
