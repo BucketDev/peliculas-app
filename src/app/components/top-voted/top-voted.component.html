@@ -1,10 +1,4 @@
 <div class="container mt-3">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb bg-dark text-light">
-      <li class="breadcrumb-item" [routerLink]="['/']" aria-current="page">Home</li>
-      <li class="breadcrumb-item active" aria-current="page">Top Voted</li>
-    </ol>
-  </nav>
   <h2>Top voted <small class="text-muted">of the week</small></h2>
   <div class="row">
     <div class="col-md-3 my-2">
@@ -12,16 +6,7 @@
       <div class="card border-0" *ngIf="tags">
         <div class="card-header text-white text-center bg-dark">Category</div>
         <div class="card-body p-0">
-          <ul class="list-group">
-            <li *ngFor="let tag of tags" class="list-group-item">
-              <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input"
-                      #check [attr.id]="'tag-' + tag.id" (change)="tagSelected(check)"
-                      [value]="tag.id">
-                <label class="custom-control-label" [for]="'tag-' + tag.id">{{tag.name}}</label>
-              </div>
-            </li>
-          </ul>
+          <app-category [tags]="tags" (tagSelected)="tagSelected($event)"></app-category>
         </div>
       </div>
     </div>

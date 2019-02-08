@@ -8,6 +8,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { LoadingComponent } from './loading/loading.component';
 import { UploadComponent } from './upload/upload.component';
 import { FormsModule } from '@angular/forms';
+import { CategoryComponent } from './category/category.component';
 
 @NgModule({
   imports: [
@@ -20,13 +21,15 @@ import { FormsModule } from '@angular/forms';
     NavbarComponent,
     CarouselComponent,
     LoadingComponent,
-    UploadComponent
+    UploadComponent,
+    CategoryComponent
   ],
   exports: [
     NavbarComponent,
     CarouselComponent,
     LoadingComponent,
-    UploadComponent
+    UploadComponent,
+    CategoryComponent
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,10 @@
+<ul class="list-group">
+  <li *ngFor="let tag of tags" class="list-group-item">
+    <div class="custom-control custom-switch">
+      <input type="checkbox" class="custom-control-input"
+            #check [attr.id]="'tag-' + tag.id" (change)="tagChecked(check)"
+            [value]="tag.id">
+      <label class="custom-control-label" [for]="'tag-' + tag.id">{{tag.name}}</label>
+    </div>
+  </li>
+</ul>

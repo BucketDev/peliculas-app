@@ -1,10 +1,5 @@
 <app-loading *ngIf="!movie"></app-loading>
 <div class="container mt-3" *ngIf="movie">
-  <ol class="breadcrumb bg-dark text-light">
-    <li class="breadcrumb-item" [routerLink]="['/']" aria-current="page">Home</li>
-    <li class="breadcrumb-item" [routerLink]="['/topVoted']" aria-current="page">Top Voted</li>
-    <li class="breadcrumb-item active" aria-current="page">{{movie.name}}</li>
-  </ol>
   <h2>{{movie.name}} <small class="text-muted">{{movie.premiere | movieDate}}</small></h2>
   <div class="row animated fadeIn">
     <div class="col-md-6 my-2">

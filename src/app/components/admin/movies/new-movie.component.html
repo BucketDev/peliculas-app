@@ -21,6 +21,9 @@
       <input type="date" class="form-control" id="premiere" required
             [(ngModel)]="movie.premiere" name="premiere" #premiere="ngModel">
     </div>
+    <div class="form-group">
+      <app-category [tags]="tags" (tagSelected)="tagSelected($event)"></app-category>
+    </div>
     <app-upload [label]="'Photo'" (photoUrl)="setPhotoUrl($event)"></app-upload>
     <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
       <fa-icon [icon]="faSave"></fa-icon> Create</button>

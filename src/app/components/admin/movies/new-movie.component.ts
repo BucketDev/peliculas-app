@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Movie } from 'src/app/interfaces/movie.interface';
-import { MovieService } from '../../../providers/movie.service';
-import { faSave, faBan } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
+import { MovieService } from '../../../providers/movie.service';
+import { TagService } from '../../../providers/tag.service';
+import { Movie } from '../../../interfaces/movie.interface';
+import { Tag } from '../../../interfaces/tag.interface';
+import { faSave, faBan } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-new-movie',
@@ -15,17 +17,21 @@ export class NewMovieComponent implements OnInit {
   faBan = faBan;
 
   photo: File;
-  private movie: Movie;
+  movie: Movie;
+  tags: Tag[];
 
   constructor(private movieService: MovieService,
+              private tagService: TagService,
               public router: Router) {
+    this.tagService.getTags().subscribe((tags: Tag[]) => this.tags = tags);
     this.movie = {
       name: '',
       premiere: null,
       summary: '',
       photoUrl: '',
       youtubeCode: '',
-      likes: 0
+      likes: 0,
+      tags: []
     };
   }
 
@@ -34,6 +40,14 @@ export class NewMovieComponent implements OnInit {
 
   setPhotoUrl = (photoUrl: string) => {
     this.movie.photoUrl = photoUrl;
+  }
+
+  tagSelected = (element: HTMLInputElement) => {
+    let value = parseInt(element.value);
+    if(element.checked)
+      this.movie.tags.push(value);
+    else
+      this.movie.tags.splice(this.movie.tags.indexOf(value), 1);
   }
 
   createMovie = () => {
