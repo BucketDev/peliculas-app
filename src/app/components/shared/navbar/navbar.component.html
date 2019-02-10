@@ -28,7 +28,7 @@
                     [ngClass]="{'p-0': auth.peliUser.photo}"
                     [routerLink]="['/profile', auth.peliUser.uid]">
               <img *ngIf="auth.peliUser.photo" src="{{auth.peliUser.photo}}"
-                    alt="photo" class="img-peli-thumbnail">
+                    alt="photo" class="img-peli-thumbnail rounded-left bg-light">
               <fa-icon *ngIf="!auth.peliUser.photo" [icon]="faUserCircle"></fa-icon>
               <small class="text-monospace mx-2">{{auth.peliUser.displayName}}</small>
             </button>

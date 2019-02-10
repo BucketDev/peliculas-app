@@ -21,6 +21,7 @@ export class UploadComponent implements OnInit {
 
   @Output() photoUrl = new EventEmitter<string>()
   @Input() label: string;
+  @Input() path: string;
 
   constructor(private uploadService: UploadService) {
     this.upload = {
@@ -40,7 +41,7 @@ export class UploadComponent implements OnInit {
   }
 
   uploadFile = () => {
-    let uploadTask = this.uploadService.upload(this.upload);
+    let uploadTask = this.uploadService.upload(this.upload, this.path);
     this.uploading = true;
     uploadTask.then((snapshot) => {
       snapshot.ref.getDownloadURL().then((downloadURL: string) => {

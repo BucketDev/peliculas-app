@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { LikedMovie } from '../interfaces/liked-movie.interface';
 import { PeliUser } from '../interfaces/peli-user.interface';
 import { MovieService } from './movie.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class UserService {
   userCollection: AngularFirestoreCollection<PeliUser>;
 
   constructor(private afs: AngularFirestore,
-              private movieService: MovieService) {
+              private movieService: MovieService,
+              private auth: AuthService) {
     this.userCollection = this.afs.collection('users')
   }
 
@@ -34,5 +36,9 @@ export class UserService {
     this.userCollection.doc(uid).collection('likedMovies').doc(movieId).delete();
     this.movieService.updateLikes(movieId, false);
   }
+
+  updatePhoto = (user: PeliUser) => this.userCollection.doc(user.uid).update({
+    photo: user.photo
+  });
 
 }

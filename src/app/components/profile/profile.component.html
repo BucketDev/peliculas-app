@@ -6,6 +6,10 @@
       <div class="card border-0 shadow">
         <img src="{{user.photo}}" class="card-img-top" alt="user photo">
         <div class="card-body">
+          <app-upload *ngIf="uploadingPhoto" [label]="'Upload a profile photo'"
+                      [path]="'users/' + user.uid" (photoUrl)="photoUploaded($event)"></app-upload>
+          <button *ngIf="!uploadingPhoto && canModify" type="button" class="mb-3 btn btn-success btn-block"
+                  (click)="showUpload()">Upload a photo</button>
           <h5 class="card-title">About yourself</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         </div>

@@ -38,8 +38,8 @@ export class AuthService {
   }
 
   createUser = (user: FireBaseUser): void => {
-    this.peliUsersCollection.doc(user.uid).get().subscribe((data:DocumentSnapshot<PeliUser>) => {
-      if(!data.exists) {
+    this.peliUsersCollection.doc(user.uid).valueChanges().subscribe((data: PeliUser) => {
+      if(!data) {
         //Adds the user
         this.peliUser = {
           displayName: user.displayName,
@@ -51,7 +51,7 @@ export class AuthService {
         this.peliUsersCollection.doc(user.uid).set(this.peliUser);
       } else {
         //just adds a reference to the user
-        this.peliUser = data.data();
+        this.peliUser = data;
       }
     });
   }

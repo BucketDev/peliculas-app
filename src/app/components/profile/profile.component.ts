@@ -22,17 +22,31 @@ export class ProfileComponent implements OnInit {
 
   user: PeliUser;
   reviews: Review[];
+  uploadingPhoto: boolean = false;
+  canModify: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private userService: UserService) {
-    this.activatedRoute.params.subscribe(params => {
-      this.userService.getUser(params['uid']).subscribe((user: DocumentSnapshot<PeliUser>) => {
-        this.user = user.data();
-      })
-    });
+              private userService: UserService,
+              private auth: AuthService) {
+    this.activatedRoute.params.subscribe(params =>
+      this.auth.peliUser$.subscribe((peliUser: PeliUser) =>
+        this.userService.getUser(params['uid']).subscribe((user: DocumentSnapshot<PeliUser>) => {
+          this.user = user.data();
+          this.canModify = this.user.uid === peliUser.uid;
+        })
+      )
+    );
   }
 
   ngOnInit() {
   }
+
+  showUpload = () => this.uploadingPhoto = true;
+
+  photoUploaded = (photoUrl) => {
+    this.user.photo = photoUrl;
+    this.uploadingPhoto = false;
+    this.userService.updatePhoto(this.user);
+  };
 
 }
