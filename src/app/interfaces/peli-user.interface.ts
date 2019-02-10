@@ -4,7 +4,8 @@ export interface PeliUser {
   uid: string,
   displayName: string,
   email: string,
-  photo: string
+  password?: string,
+  photo?: string
   likedMovies?: LikedMovie[],
   admin: boolean
 }

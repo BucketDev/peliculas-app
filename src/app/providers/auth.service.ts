@@ -12,7 +12,6 @@ import { Observable, of } from 'rxjs';
 })
 export class AuthService {
 
-
   peliUserDocument: AngularFirestoreDocument<PeliUser>;
   peliUser: PeliUser = null;
   peliUser$: Observable<PeliUser>;
@@ -32,7 +31,7 @@ export class AuthService {
     this.afAuth.authState.subscribe((user: FireBaseUser) => {
       if(user) {
         this.createUser(user);
-        let route = this.router.url === '/signin' ? '/' : this.router.url;
+        let route = this.router.url.startsWith('/landing')  ? '/' : this.router.url;
         this.router.navigate([route]);
       }
     });
@@ -58,8 +57,26 @@ export class AuthService {
   }
 
   googleLogin = (): void => {
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()
+      .setCustomParameters({
+        prompt: 'select_account'
+      })
+    );
   }
+
+  emailSignIn = (peliUser: PeliUser): Promise<void> =>
+    this.afAuth.auth.createUserWithEmailAndPassword(peliUser.email, peliUser.password)
+      .then(data => {
+        if(data.additionalUserInfo.isNewUser) {
+          delete peliUser.password;
+          peliUser.uid = data.user.uid;
+          this.peliUsersCollection.doc(data.user.uid).set(peliUser);
+        }
+      });
+
+  emailLogIn = (peliUser: PeliUser): Promise<void> =>
+    this.afAuth.auth.signInWithEmailAndPassword(peliUser.email, peliUser.password)
+      .then(data => console.log(data));
 
   logout = (): void => {
     this.afAuth.auth.signOut();

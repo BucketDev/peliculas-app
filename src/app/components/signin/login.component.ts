@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../providers/auth.service';
 import { PeliUser } from '../../interfaces/peli-user.interface';
+import { AuthService } from '../../providers/auth.service';
 
 @Component({
-  selector: 'app-signin',
-  templateUrl: './signin.component.html',
+  selector: 'app-login',
+  templateUrl: './login.component.html',
   styles: []
 })
-export class SigninComponent implements OnInit {
+export class LoginComponent implements OnInit {
 
   peliUser: PeliUser;
 
@@ -24,8 +24,8 @@ export class SigninComponent implements OnInit {
   ngOnInit() {
   }
 
-  signIn = () => {
-    this.auth.emailSignIn(this.peliUser).catch(error => console.log(error));
+  logIn = () => {
+    this.auth.emailLogIn(this.peliUser).catch(error => console.log(error));
   }
 
 }

@@ -13,17 +13,16 @@ import { SharedModule } from './components/shared/shared.module'
 import { LandingModule } from './components/landing/landing.module';
 import { TopVotedModule } from './components/top-voted/top-voted-module';
 import { ProfileModule } from './components/profile/profile.module';
+import { AdminModule } from './components/admin/admin.module';
+import { SigninModule } from './components/signin/signin.module';
 
 import { AppComponent } from './app.component';
-import { SigninComponent } from './components/signin/signin.component';
 
 import { environment } from '../environments/environment';
-import { AdminModule } from './components/admin/admin.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +34,7 @@ import { AdminModule } from './components/admin/admin.module';
     AngularFireStorageModule,
     FontAwesomeModule,
     SharedModule,
+    SigninModule,
     LandingModule,
     TopVotedModule,
     ProfileModule,

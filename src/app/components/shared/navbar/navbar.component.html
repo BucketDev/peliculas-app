@@ -22,20 +22,25 @@
         </div>
       </li>
     </ul>
-    <ul class="navbar-nav d-flex align-items-center" *ngIf="auth.peliUser">
-      <li class="btn btn-sm btn-outline-light nav-item p-0 mx-2 d-flex align-items-center"
-            [routerLink]="['/profile', auth.peliUser.uid]">
-        <img src="{{auth.peliUser.photo}}" alt="photo" class="img-peli-thumbnail">
-        <small class="text-monospace mx-2">{{auth.peliUser.displayName}}</small>
+    <ul class="navbar-nav" *ngIf="auth.peliUser">
+      <li class="nav-item mx-md-2">
+            <button type="button" class="btn btn-block btn-outline-light"
+                    [ngClass]="{'p-0': auth.peliUser.photo}"
+                    [routerLink]="['/profile', auth.peliUser.uid]">
+              <img *ngIf="auth.peliUser.photo" src="{{auth.peliUser.photo}}"
+                    alt="photo" class="img-peli-thumbnail">
+              <fa-icon *ngIf="!auth.peliUser.photo" [icon]="faUserCircle"></fa-icon>
+              <small class="text-monospace mx-2">{{auth.peliUser.displayName}}</small>
+            </button>
       </li>
       <li class="nav-item">
-          <button class="btn btn-outline-danger" type="button" (click)="logOut()">
+          <button class="btn btn-block btn-danger" type="button" (click)="logOut()">
             <fa-icon [icon]="faSignOutAlt"></fa-icon>
           </button>
       </li>
     </ul>
     <ul class="navbar-nav" *ngIf="!auth.peliUser">
-      <button class="btn btn-outline-success" type="button" [routerLink]="['/signin']">
+      <button class="btn btn-success" type="button" [routerLink]="['/landing']">
         <fa-icon [icon]="faSignInAlt"></fa-icon> Sign in
       </button>
     </ul>
