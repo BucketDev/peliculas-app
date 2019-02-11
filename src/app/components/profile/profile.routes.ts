@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { ReviewUserComponent } from '../review/review-user.component';
+import { ReviewUserComponent } from './review-user/review-user.component';
 import { LikedMoviesComponent } from './liked-movies/liked-movies.component';
 
 export const PROFILE_ROUTES: Routes = [

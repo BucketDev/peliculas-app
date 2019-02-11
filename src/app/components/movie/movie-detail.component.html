@@ -11,7 +11,7 @@
       </div>
       <div class="card">
         <div class="card-body">
-          <div class="d-flex justify-content-end align-items-center">
+          <div class="d-flex justify-content-between align-items-center">
             <p class="card-text m-0 text-justify">{{movie.summary}}</p>
             <button type="button" class="btn btn-lg ml-3" *ngIf="auth.peliUser"
                     [ngClass]="{'btn-outline-danger': !liked, 'btn-danger': liked}" #likeButton

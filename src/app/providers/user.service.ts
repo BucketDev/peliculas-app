@@ -41,4 +41,11 @@ export class UserService {
     photo: user.photo
   });
 
+  updateDisplayName = (user: PeliUser) => this.userCollection.doc(user.uid).update({
+    displayName: user.displayName
+  });
+
+  updateAbout = (user: PeliUser) => this.userCollection.doc(user.uid).update({
+    about: user.about
+  });
 }

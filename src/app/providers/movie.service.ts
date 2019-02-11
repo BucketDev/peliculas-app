@@ -58,9 +58,7 @@ export class MovieService {
       })
     }));
 
-  createMovie = (movie: Movie): Promise<DocumentReference> => {
-    return this.moviesCollection.add(movie);
-  }
+  createMovie = (movie: Movie): Promise<DocumentReference> => this.moviesCollection.add(movie)
 
   updateLikes = (id: string, upvote: boolean) => {
     this.getMovie(id).subscribe((movie: DocumentSnapshot<Movie>) => {
@@ -80,5 +78,9 @@ export class MovieService {
       })
     })
   );
+
+  delete = (id: string) => this.moviesCollection.doc(id).delete();
+
+  updateMovie = (movie: Movie): Promise<void> => this.moviesCollection.doc(movie.id).set(movie);
 
 }

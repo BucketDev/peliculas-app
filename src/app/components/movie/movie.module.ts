@@ -30,6 +30,7 @@ import { YoutubeUriPipe } from '../../pipes/youtube-uri.pipe';
   ],
   exports: [
     MovieComponent,
+    MovieTagsPipe,
     MovieDatePipe
   ]
 })

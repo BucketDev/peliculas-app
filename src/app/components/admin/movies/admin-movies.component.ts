@@ -25,6 +25,8 @@ export class AdminMoviesComponent implements OnInit {
     return average >= 75 ? 'bg-success' : (average >= 50 ? 'bg-warning' : 'bg-danger');
   }
 
+  deleteMovie = (movieId: string) => this.movieService.delete(movieId);
+
   ngOnInit() {
   }
 

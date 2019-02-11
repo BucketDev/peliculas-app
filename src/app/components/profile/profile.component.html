@@ -1,8 +1,24 @@
 <app-loading *ngIf="!user"></app-loading>
 <div class="container my-2" *ngIf="user">
   <div class="row">
-    <div class="col-md-4 my-2">
-      <h4 class="text-monospace">{{user.displayName}}</h4>
+    <div class="col-md-4 mb-2">
+      <div class="d-flex justify-content-between align-items-center mb-2"
+            *ngIf="!updatingDisplayName && canModify">
+        <h4 class="text-monospace m-0">{{user.displayName}}</h4>
+        <button type="button" class="btn btn-warning" (click)="showDisplayName()">
+          <fa-icon [icon]="faEdit"></fa-icon>
+        </button>
+      </div>
+      <form (ngSubmit)="updateDisplayName()" #formDisplayName="ngForm" *ngIf="updatingDisplayName">
+        <div class="d-flex mb-2">
+          <input class="form-control" required
+                  [(ngModel)]="user.displayName" name="displayName" #displayName="ngModel" />
+          <button type="submit" class="btn btn-primary rounded-0" [disabled]="formDisplayName.invalid">
+            <fa-icon [icon]="faSave"></fa-icon></button>
+          <button type="button" class="btn btn-danger rounded-0" (click)="cancelDisplayName()">
+            <fa-icon [icon]="faBan"></fa-icon></button>
+        </div>
+      </form>
       <div class="card border-0 shadow">
         <img src="{{user.photo}}" class="card-img-top" alt="user photo">
         <div class="card-body">
@@ -10,8 +26,23 @@
                       [path]="'users/' + user.uid" (photoUrl)="photoUploaded($event)"></app-upload>
           <button *ngIf="!uploadingPhoto && canModify" type="button" class="mb-3 btn btn-success btn-block"
                   (click)="showUpload()">Upload a photo</button>
-          <h5 class="card-title">About yourself</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="card-title m-0">About yourself</h5>
+            <button type="button" class="btn btn-warning btn-sm" (click)="showAbout()"
+                    *ngIf="!updatingAbout && canModify">
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+          </div>
+          <p class="card-text text-justify font-italic" *ngIf="!updatingAbout">{{user.about}}</p>
+          <form (ngSubmit)="updateAbout()" #formAbout="ngForm" *ngIf="updatingAbout">
+              <textarea class="form-control" required
+                      [(ngModel)]="user.about" name="about" #about="ngModel">
+              </textarea>
+              <button type="submit" class="btn btn-primary" [disabled]="formAbout.invalid">
+                <fa-icon [icon]="faSave"></fa-icon> Save</button>
+              <button type="button" class="btn btn-danger ml-2" (click)="cancelAbout()">
+                <fa-icon [icon]="faBan"></fa-icon> Cancel</button>
+          </form>
         </div>
       </div>
     </div>

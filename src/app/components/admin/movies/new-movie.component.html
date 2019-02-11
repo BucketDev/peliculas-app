@@ -25,7 +25,7 @@
       <app-category [tags]="tags" (tagSelected)="tagSelected($event)"></app-category>
     </div>
     <app-upload [label]="'Photo'" (photoUrl)="setPhotoUrl($event)"></app-upload>
-    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+    <button type="submit" class="btn btn-primary" >
       <fa-icon [icon]="faSave"></fa-icon> Create</button>
     <button type="button" class="btn btn-danger ml-2" [routerLink]="['/admin/movies']">
       <fa-icon [icon]="faBan"></fa-icon> Cancel</button>

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MovieService } from '../../../providers/movie.service';
 import { TagService } from '../../../providers/tag.service';
 import { Movie } from '../../../interfaces/movie.interface';
 import { Tag } from '../../../interfaces/tag.interface';
 import { faSave, faBan } from '@fortawesome/free-solid-svg-icons';
+import { DocumentSnapshot } from '@angular/fire/firestore';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-new-movie',
@@ -22,8 +24,9 @@ export class NewMovieComponent implements OnInit {
 
   constructor(private movieService: MovieService,
               private tagService: TagService,
-              public router: Router) {
-    this.tagService.getTags().subscribe((tags: Tag[]) => this.tags = tags);
+              private router: Router,
+              public activatedRoute: ActivatedRoute,
+              @Inject(LOCALE_ID) private locale: string) {
     this.movie = {
       name: '',
       premiere: null,
@@ -33,6 +36,15 @@ export class NewMovieComponent implements OnInit {
       likes: 0,
       tags: []
     };
+    this.activatedRoute.params.subscribe(params => {
+      if(params['id']) {
+        this.movie.id = params['id'];
+      }
+      this.tagService.getTags().subscribe((tags: Tag[]) => {
+        this.tags = tags;
+        this.movie.id && this.getMovie(this.movie.id);
+      });
+    });
   }
 
   ngOnInit() {
@@ -51,10 +63,27 @@ export class NewMovieComponent implements OnInit {
   }
 
   createMovie = () => {
-    this.movie.premiere = new Date(this.movie.premiere);
-    this.movieService.createMovie(this.movie).then(() => {
-      this.router.navigate(['/admin/movies']);
-    });
+    let datesArray = this.movie.premiere.split('-').map(date => parseInt(date));
+    this.movie.premiere = new Date(datesArray[0], datesArray[1] - 1, datesArray[2]);
+    if(this.movie.id)
+      this.movieService.updateMovie(this.movie).then(() => {
+        this.router.navigate(['/admin/movies'])
+      });
+    else
+      this.movieService.createMovie(this.movie).then(() => {
+        this.router.navigate(['/admin/movies']);
+      });
   }
+
+  getMovie = (id: string) => this.movieService.getMovie(id)
+    .subscribe((movieDocument: DocumentSnapshot<Movie>) => {
+      let premiere: string = formatDate(movieDocument.data().premiere.toDate(), 'yyyy-MM-dd', this.locale);
+      this.movie = movieDocument.data();
+      this.movie.premiere = premiere;
+      this.movie.id = id;
+      this.movie.tags.forEach((tagId: number) => {
+        (<HTMLInputElement>document.getElementById('tag-' + tagId)).checked = true;
+      })
+    });
 
 }

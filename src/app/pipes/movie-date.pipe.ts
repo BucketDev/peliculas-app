@@ -11,7 +11,7 @@ export class MovieDatePipe implements PipeTransform {
   constructor(@Inject(LOCALE_ID) private locale: string){}
 
   transform(value: Timestamp, format?: any): any {
-    return formatDate(value.toDate(), format || 'mediumDate', this.locale);
+    return value ? formatDate(value.toDate(), format || 'mediumDate', this.locale) : null;
   }
 
 }

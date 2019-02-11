@@ -4,30 +4,43 @@
       <fa-icon [icon]="faPlus"></fa-icon> Add Movie
     </button>
   </div>
-  <div class="row">
-    <div class="card-columns">
-      <div *ngFor="let movie of movies" class="card bg-secondary text-white">
-        <img src="{{movie.photoUrl}}" alt="movie photo" style="cursor: pointer"
-              class="w-100" [routerLink]="['/movie', movie.id]">
-        <div class="card-body">
-          {{movie.name}}
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" [style.width.%]="movie.average"
+  <table class="table table-sm table-striped">
+    <thead class="thead-dark">
+        <th class="d-none d-sm-table-cell">Photo</th>
+        <th>Name</th>
+        <th>Average</th>
+        <th>Likes</th>
+        <th>Categories</th>
+        <th></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let movie of movies">
+          <td class="d-none d-sm-table-cell">
+            <img src="{{movie.photoUrl}}" alt="movie photo" style="cursor: pointer"
+                class="img-peli-admin" [routerLink]="['/movie', movie.id]">
+          </td>
+          <td>{{movie.name}}</td>
+          <td>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" [style.width.%]="movie.average"
                   [ngClass]="getProgressBg(movie.average)"></div>
-          </div>
-        </div>
-        <div class="card-footer d-flex justify-content-between align-items-center">
-          <div>
-            <button type="button" class="btn btn-sm btn-warning">
+            </div>
+          </td>
+          <td>
+            <small class="text-right">{{movie.likes}} likes</small>
+          </td>
+          <td>
+            <span class="badge badge-primary m-1" *ngFor="let tag of movie.tags | movieTags">{{tag}}</span>
+          </td>
+          <td>
+            <button type="button" class="btn btn-sm btn-warning" [routerLink]="['edit', movie.id]">
               <fa-icon [icon]="faEdit"></fa-icon> Edit
             </button>
-            <button type="button" class="btn btn-sm btn-danger ml-2">
+            <button type="button" class="btn btn-sm btn-danger ml-2" (click)="deleteMovie(movie.id)">
               <fa-icon [icon]="faTrash"></fa-icon> Delete
             </button>
-          </div>
-          <small class="text-right">1 likes</small>
-        </div>
-      </div>
-    </div>
-  </div>
+          </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

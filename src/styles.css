@@ -17,6 +17,9 @@ body {
 .img-peli-card {
   height: 200px;
 }
+.img-peli-admin {
+  height: 70px;
+}
 .loading {
   position: absolute;
   left: 50%;

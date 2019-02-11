@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { ReviewComponent } from './review.component';
-import { ReviewUserComponent } from './review-user.component';
 import { NewReviewComponent } from './new-review.component';
 
 @NgModule({
@@ -17,12 +16,10 @@ import { NewReviewComponent } from './new-review.component';
   ],
   declarations: [
     ReviewComponent,
-    ReviewUserComponent,
     NewReviewComponent
   ],
   exports: [
     ReviewComponent,
-    ReviewUserComponent,
     NewReviewComponent
   ]
 })
